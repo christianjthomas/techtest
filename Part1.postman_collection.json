@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "09f9c02d-f82b-46a8-9d5a-603d5fe1f8a7",
+		"name": "Part1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Install Postman BDD",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// \"install\" Postman BDD\r",
+							"postman.setGlobalVariable('postmanBDD', responseBody);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://bigstickcarpet.com/postman-bdd/dist/postman-bdd.min.js",
+					"protocol": "http",
+					"host": [
+						"bigstickcarpet",
+						"com"
+					],
+					"path": [
+						"postman-bdd",
+						"dist",
+						"postman-bdd.min.js"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Github User Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Load Postman BDD\r",
+							"eval(globals.postmanBDD);\r",
+							"\r",
+							"describe('Check user info', () => {\r",
+							"\r",
+							"    it('should return a 200 response', () => {\r",
+							"        expect(response.should.have.status(200));\r",
+							"    })\r",
+							"\r",
+							"    it('should return a name of \"Gregory Loscombe\"', () => {\r",
+							"        expect(response.body.name).to.equal('Gregory Loscombe');\r",
+							"    })\r",
+							"\r",
+							"    it('should return an ID of 15330', () => {\r",
+							"        expect(response.body.id).to.equal(15330);\r",
+							"    })\r",
+							"\r",
+							"    it('should return a location of \"Manchester\"', () => {\r",
+							"        expect(response.body.location).to.equal(\"Manchester\");\r",
+							"    })\r",
+							"\r",
+							"    it('should return the number of public repos 7', () => {\r",
+							"        expect(response.body.public_repos).to.equal(7);\r",
+							"    })\r",
+							"\r",
+							"    it('should return the number of public gists 11', () => {\r",
+							"        expect(response.body.public_gists).to.equal(11);\r",
+							"    })\r",
+							"\r",
+							"    it('should return the number of followers 13', () => {\r",
+							"        expect(response.body.followers).to.equal(13);\r",
+							"    })\r",
+							"\r",
+							"    it('should return the number of following 29', () => {\r",
+							"        expect(response.body.following).to.equal(29);\r",
+							"    })\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.github.com/users/{{userID}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"users",
+						"{{userID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
